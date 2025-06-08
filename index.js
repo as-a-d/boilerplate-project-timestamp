@@ -18,11 +18,66 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/api", (req,res) => {
+  res.json({
+    unix: new Date().getTime(),
+    utc: new Date().toUTCString()
+    
+  })
+})
 
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+str = 'insia '
+
+console.log([...str].includes('z'))
+console.log(typeof NaN === 'number')
+
+// test
+app.get("/api/:date?",(req,res) => {
+  date = req.params.date
+  date_format = new Date(date)
+  if (isNaN(date_format.getTime())==true) {
+
+    if (isNaN(Number(date)) ==false) {
+      res.json({
+        unix: new Date(Number(date)).getTime(),
+        utc: new Date(Number(date)).toUTCString()
+      })
+
+
+
+    
+    } else {res.json({error:"Invalid Date"})}
+     
+    
+  }
+
+  else (res.json({
+    unix : date_format.getTime(),
+    utc : date_format.toUTCString()
+    
+  }))
+
+
+
+  
+
+})
+
+
+
+// app.get("/api/1451001600000",(req,res) => {
+//   date = req.params.date
+//   res.json({
+//     unix : new Date(Number(date)).getTime(),
+//     utc :  new Date(Number(date)).toUTCString()
+
+//   })
+// })
+
 
 
 
